@@ -1,0 +1,15 @@
+Improve the following prompt to be more direct and concise, removing any unnecessary polite or indirect phrases such as "please", "if you don’t mind", "thank you", or "I would like to". Get straight to the point of the task.
+
+Here are examples demonstrating how to apply this principle:
+
+original: Please, can you list the benefits of engaging in regular exercise? 
+improved: List the benefits of regular exercise.
+
+original: Would you mind calculating 2+6? 
+improved: Calculate 2+6.
+
+========
+Based on this approach, refine the following prompt to ensure it is straightforward and focused on the task:
+
+original: {prompt}
+improved:

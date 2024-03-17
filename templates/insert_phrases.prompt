@@ -1,0 +1,9 @@
+[phrases to be incorporated]
+{phrases_collection} 
+
+Your task is to insert each phrase from the list above into the appropriate location within the following prompt, without modifying or interpreting it. These phrases are intended to encourage or stimulate the LLM, enhancing the quality of its responses when the prompt is entered.
+You MUST insert every phrase from the provided list within the following prompt, focusing only on placing them in suitable positions, rather than altering or analyzing their content.
+
+========
+original: {prompt}
+prompt with inserted phrases:
