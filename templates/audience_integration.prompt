@@ -1,0 +1,7 @@
+Integrate the intended audience in the prompt, e.g., the audience is an expert in the field.
+
+========
+Based on this approach, refine the following prompt.
+
+original: {prompt}
+improved:

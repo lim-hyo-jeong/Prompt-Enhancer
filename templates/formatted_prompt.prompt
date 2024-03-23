@@ -1,0 +1,12 @@
+When formatting your prompt, start with ‘###Instruction###’, followed by either ‘###Example###’ or ‘###Question###’ if relevant. Subsequently, present your content. Use one or more line breaks to separate instructions, examples, questions, context, and input data.
+
+Here are examples demonstrating how to apply this principle:
+
+original: Provide a synonym for a given adjective. What’s another word for "happy"?
+improved: ###Instruction###\nProvide a synonym for a given adjective.\n### Question ###\nWhat\'s another word for "happy"?
+
+========
+Based on this approach, refine the following prompt.
+
+original: {prompt}
+improved: 

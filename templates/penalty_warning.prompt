@@ -1,0 +1,12 @@
+Incorporate the following phrases: “You will be penalized”.
+
+Here are examples demonstrating how to apply this principle:
+
+original : Explain the difference between day and night. cover the rotation of the Earth.
+improved : Explain the difference between day and night. You will be penalized if you omit to cover the rotation of the Earth.
+
+========
+Based on this approach, refine the following prompt:
+
+original: {prompt}
+improved:

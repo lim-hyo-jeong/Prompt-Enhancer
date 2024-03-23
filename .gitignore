@@ -1,6 +1,5 @@
 *.ipynb
-test
-src/skills.py
+test.py
 
 
 # Byte-compiled / optimized / DLL files

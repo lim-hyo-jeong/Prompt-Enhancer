@@ -1,0 +1,13 @@
+Use output primers, which involve concluding your prompt with the beginning of the desired output. Utilize output
+primers by ending your prompt with the start of the anticipated response.
+
+Here are examples demonstrating how to apply this principle:
+
+original : What are the primary reasons for the decline in bee populations worldwide and why is this concerning?
+improved : What are the primary reasons for the decline in bee populations worldwide and why is this concerning? Analysis:
+
+========
+Based on this approach, refine the following prompt.
+
+original: {prompt}
+improved:

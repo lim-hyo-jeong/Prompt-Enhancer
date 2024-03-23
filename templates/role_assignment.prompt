@@ -1,0 +1,12 @@
+Assign a role to the large language models.
+
+Here are examples demonstrating how to apply this principle:
+
+original : Can you discuss the effects of deforestation on biodiversity?
+improved : Act as an environmental scientist. Discuss the effects of deforestation on biodiversity.
+
+========
+Based on this approach, refine the following prompt:
+
+original: {prompt}
+improved:

@@ -1,0 +1,12 @@
+Employ affirmative directives such as ‘do,’ while steering clear of negative language like ‘don’t’.
+
+Here are examples demonstrating how to apply this principle:
+
+original : Prepare three pieces of advice to help high school students achieve high grades. Don't use complex words or vocabulary and don't add details.
+improved : Prepare three pieces of advice to help high school students achieve high grades. Use only simple words and make each piece of advice as short as you can.
+
+========
+Based on this approach, refine the following prompt.
+
+original: {prompt}
+improved:

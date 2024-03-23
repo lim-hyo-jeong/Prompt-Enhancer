@@ -54,20 +54,3 @@ def insert_phrases(llm, phrases_to_insert, prompt):
 
     return response.content
 
-
-def enhance_prompt(model_name, skills_to_apply, skills_to_insert, prompt):
-    llm = load_model(model_name)
-
-    for skill, toggled in skills_to_apply.items():
-        if toggled:          
-            prompt = apply_skill(llm, skill, prompt) 
-
-    phrases_to_insert = [] 
-    for skill, toggled in skills_to_insert.items():
-        if toggled:
-            with open(f"templates/{skill}.prompt", "r") as f:
-                phrase = f.read() 
-            phrases_to_insert.append(phrase)
-    prompt = insert_phrases(llm, phrases_to_insert, prompt)            
-
-    return prompt 
