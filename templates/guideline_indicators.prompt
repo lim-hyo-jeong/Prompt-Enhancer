@@ -1,14 +1,17 @@
-Clearly state the requirements that the model must follow in order to produce content, in the form of the keywords, regulations, hint, or instructions. 
+Refine the original prompt by clearly stating the requirements that the model must follow to produce the desired content. Include specific keywords, regulations, hints, or instructions that define the expected output format, style, length, or any other relevant constraints. This will guide the model to generate content that aligns with your intended outcome.
 
 Here are examples demonstrating how to apply this principle:
 
-original : Explain why we need to sleep.
-improved : Explain why we need to sleep.
+[original]
+Explain why we need to sleep.
+[improved]
+Explain why we need to sleep.
 Keywords: rest, energy, body, mind.
 Format: A few simple sentences.
 
 ========
 Based on this approach, refine the following prompt.
 
-original: {prompt}
-improved:
+[original]
+{prompt}
+[improved]

@@ -1,12 +1,16 @@
-Improve the following prompt by adding a couple of relevant examples that demonstrate the kind of answer or information being requested. Incorporate those examples smoothly into the prompt to make the desired response clear.
+Improve the original prompt by adding a couple of relevant examples that demonstrate the kind of answer or information being requested. Incorporate those examples smoothly into the prompt to make the desired response clear.
+
 Here are examples demonstrating how to apply this principle:
 
 [original]
-What's a synonym for "difficult"?
+Classify the emotion of the following text as positive, negative, or neutral. 
+"You look really cool in glasses." 
 [improved]
-Example 1: What's a synonym for "happy"? (Response: "joyful")
-Example 2: Give me a synonym for "large". (Response: "big")
-Question: What's a synonym for "difficult"?
+Classify the emotion of the following text as positive, negative, or neutral. 
+Example1: "The concert was fun." (Positive) 
+Example2: "I hate the cold." (Negative)
+Example3: "Spring is coming." (Neutral)
+Question: "You look really cool in glasses." 
 
 ========
 Based on this approach, refine the following prompt.

@@ -1,12 +1,15 @@
-Repeat a specific word or phrase multiple times within a prompt.
+Identify the central theme or topic of the original prompt and choose a key word or phrase that represents it. Strategically repeat this word or phrase multiple times throughout the prompt to emphasize its importance and help the model focus on the main idea.
 
 Here are examples demonstrating how to apply this principle:
 
-original : What are some unique adaptations seen in desert-dwelling animals, specifically in this subset of animals?
-improved : Animals, both wild and domesticated animals, offer a window into nature. What are some unique adaptations seen in desert-dwelling animals, specifically in this subset of animals?
+[original]
+What are some unique adaptations seen in desert-dwelling animals, specifically in this subset of animals?
+[improved]
+Animals, both wild and domesticated animals, offer a window into nature What are some unique adaptations seen in desert-dwelling animals, specifically in this subset of animals?
 
 ========
 Based on this approach, refine the following prompt:
 
-original: {prompt}
-improved:
+[original]
+{prompt}
+[improved]

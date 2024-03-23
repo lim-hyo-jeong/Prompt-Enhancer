@@ -1,12 +1,15 @@
-Employ affirmative directives such as ‘do,’ while steering clear of negative language like ‘don’t’.
+When crafting the prompt, focus on using positive, action-oriented instructions like "do," "use," or "include," while avoiding negative language such as "don't," "avoid," or "never." This encourages the model to concentrate on what it should do rather than what it shouldn't.
 
 Here are examples demonstrating how to apply this principle:
 
-original : Prepare three pieces of advice to help high school students achieve high grades. Don't use complex words or vocabulary and don't add details.
-improved : Prepare three pieces of advice to help high school students achieve high grades. Use only simple words and make each piece of advice as short as you can.
+[original]
+Prepare three pieces of advice to help high school students achieve high grades. Don't use complex words or vocabulary and don't add details.
+[improved]
+Prepare three pieces of advice to help high school students achieve high grades. Use only simple words and make each piece of advice as short as you can.
 
 ========
 Based on this approach, refine the following prompt.
 
-original: {prompt}
-improved:
+[original]
+{prompt}
+[improved]

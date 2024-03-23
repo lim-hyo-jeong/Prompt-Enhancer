@@ -1,12 +1,15 @@
-Incorporate the following phrases: “You will be penalized”.
+Include phrases like "You will be penalized" or similar penalty-related language in the original prompt to stress the importance of adhering to specific requirements or including crucial information. This type of phrasing emphasizes the significance of certain elements and discourages the model from omitting them in its response.
 
 Here are examples demonstrating how to apply this principle:
 
-original : Explain the difference between day and night. cover the rotation of the Earth.
-improved : Explain the difference between day and night. You will be penalized if you omit to cover the rotation of the Earth.
+[original] 
+Explain the difference between day and night. cover the rotation of the Earth.
+[improved]
+Explain the difference between day and night. You will be penalized if you omit to cover the rotation of the Earth.
 
 ========
 Based on this approach, refine the following prompt:
 
-original: {prompt}
-improved:
+[original]
+{prompt}
+[improved]

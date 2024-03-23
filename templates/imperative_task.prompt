@@ -1,12 +1,15 @@
-Improve the following prompt by making the instructions more explicit and imperative. Identify the main task or objective in the original prompt and add the phrases "Your task is" or "you MUST". 
+Improve the original prompt by making the instructions more explicit and imperative. Identify the main task or objective in the original prompt and add the phrases "Your task is" or "you MUST". 
 
 Here are examples demonstrating how to apply this principle:
 
-original : Mention the device used to measure temperature and state the units it measures in. 
-improved : Your task is to mention the device used to measure temperature. You MUST also state the units it measures in.
+[original]
+Mention the device used to measure temperature and state the units it measures in. 
+[improved]
+Your task is to mention the device used to measure temperature. You MUST also state the units it measures in.
 
 ========
 Based on this approach, refine the following prompt to ensure it is straightforward and focused on the task:
 
-original: {prompt}
-improved:
+[original]
+{prompt}
+[improved]

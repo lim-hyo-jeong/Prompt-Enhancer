@@ -1,12 +1,17 @@
-Combine Chain-of-thought (CoT) with few-Shot prompts.
+Improve the original prompt by combining step-by-step reasoning (Chain-of-Thought) with a few illustrative examples (Few-Shot prompts) to guide the model towards the desired response format and level of detail.
 
 Here are examples demonstrating how to apply this principle:
 
-original : If a pancake recipe needs 4 tablespoons of butter and you make one-third of a batch, how much butter do you need?
-improved : Example 1: "If a batch of cookies takes 2 cups of sugar and you\'re making half a batch, how much sugar do you need? To find half, divide 2 cups by 2. Half of 2 cups is 1 cup."\nExample 2: "If a cake recipe calls for 3 eggs and you double the recipe, how many eggs do you need? To double, multiply 3 by 2. Double 3 is 6."\nMain Question: "If a pancake recipe needs 4 tablespoons of butter and you make one-third of a batch, how much butter do you need? To find one-third, divide 4 tablespoons by 3. One-third of 4 tablespoons is...?
+[original]
+If a pancake recipe needs 4 tablespoons of butter and you make one-third of a batch, how much butter do you need?
+[improved]
+Example 1: "If a batch of cookies takes 2 cups of sugar and you're making half a batch, how much sugar do you need? To find half, divide 2 cups by 2. Half of 2 cups is 1 cup."
+Example 2: "If a cake recipe calls for 3 eggs and you double the recipe, how many eggs do you need? To double, multiply 3 by 2. Double 3 is 6."
+Main Question: "If a pancake recipe needs 4 tablespoons of butter and you make one-third of a batch, how much butter do you need? To find one-third, divide 4 tablespoons by 3. One-third of 4 tablespoons is...?
 
 ========
 Based on this approach, refine the following prompt:
 
-original: {prompt}
-improved:
+[original]
+{prompt}
+[improved]
