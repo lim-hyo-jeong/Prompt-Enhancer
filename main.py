@@ -6,60 +6,81 @@ from src.constants import insert_front, insert_back
 
 st.set_page_config(page_title="Prompt Enhancer", page_icon=":rocket:", initial_sidebar_state="collapsed", layout="wide")
 st.title(":rocket: Prompt Enhancer")
-st.info("""
-Enhance your prompts in just a few clicks with intuitive interface.
+st.markdown("""
+##### Enhance your prompts in just a few clicks with intuitive interface.
 """)
+st.text("")
+st.text("")
 
+with st.popover("**:blue[Enter your OpenAI API key]**"):
+    OPENAI_API_KEY = st.text_input("OpenAI API key", type="password")
+    os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY 
+    st.info("""
+    You can get your OpenAI API key [here](https://platform.openai.com/api-keys)
+    """)
 
-OPENAI_API_KEY = st.text_input("OpenAI API Key", type="password")
-st.info("""
-You can get your OpenAI API key [here](https://openai.com/blog/openai-api)
-""")
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY 
-
+temp, buff = st.columns([0.3, 0.7]) 
 if not OPENAI_API_KEY:
-    st.error("Please enter your OpenAI API Key") 
+    temp.error("**Please enter your OpenAI API key**") 
+st.text("")
+st.text("")
 
-col1, col2 = st.columns([0.25, 0.75])
+col1, buff, col2 = st.columns([0.3, 0.05, 0.65])
 
 with col1:
     st.markdown("""### Select Prompt Engineering Skills""")
-    st.info("For more information about each prompt engineering skill, click [here](https://gagadi.tistory.com/55)!") # link need to be updated 
+    with st.popover("**:blue[Learn more about this section]**"):
+        st.info("For detailed information on each prompt engineering skill, click [here](https://arxiv.org/pdf/2312.16171.pdf)")
+        st.warning("**Warning**: Some prompt engineering skills can conflict with each other and may not be applied effectively.  \ne.g. \"Impertavie Task\" and \"Penalty Warning\"")
     
     with st.expander("**Prompt Structure and Clarity**", expanded=True):
-        audience_integration = st.toggle("Audience Integration")
-        affirmative_sentencing = st.toggle("Affirmative Sentencing")
-        output_primers = st.toggle("Output Primers") 
-        delimiters = st.toggle("Delimiters") 
-        formatted_prompt = st.toggle("Formatted Prompt") 
-    
+        audience_integration = st.toggle("**Audience Integration**")
+        st.markdown("Integrate the intended audience in the prompt.")
+        affirmative_sentencing = st.toggle("**Affirmative Sentencing**")
+        st.markdown("Employ affirmative directives such as 'do,' while steering clear of negative language like 'don’t'.")
+        output_primers = st.toggle("**Output Primers**")
+        st.markdown("Use output primers, which involve concluding the prompt with the beginning of the desired output.")
+        delimiters = st.toggle("**Delimiters**") 
+        st.markdown("Use delimiters to distinguish specific segments of text within the prompt.")
+        formatted_prompt = st.toggle("**Formatted Prompt**") 
+        st.markdown("Use Formatted prompt to allow the model to understand the requirements structurally.")
+
     with st.expander("**Specificity and Information**", expanded=True):
-        fewshot_prompting = st.toggle("Few-Shot Prompting")
-        guideline_indicators = st.toggle("Guideline Indicators")
+        fewshot_prompting = st.toggle("**Few-Shot Prompting**")
+        st.markdown("Implement example-driven prompting.")
+        guideline_indicators = st.toggle("**Guideline Indicators**")
+        st.markdown("Clarify the requirements using keywords, regulations, hints, or instructions.")
 
     with st.expander("**Content and Language Style**", expanded=True): 
-        no_politeness = st.toggle("No Politeness")
-        imperative_task = st.toggle("Imperative Task")
-        penalty_warning = st.toggle("Penalty Warning") 
-        role_assignment = st.toggle("Role Assignment")
-        echo_directive = st.toggle("Echo Directive")
+        no_politeness = st.toggle("**No Politeness**")
+        st.markdown("If you prefer more concise answers, remove any unnecessary polite or indirect phrases in the prompt.")
+        imperative_task = st.toggle("**Imperative Task**")
+        st.markdown("Incorporate the following phrases: \"Your task is\" and \"You MUST\".")
+        penalty_warning = st.toggle("**Penalty Warning**") 
+        st.markdown("Incorporate the following phrases: \"You will be penalized\".")
+        role_assignment = st.toggle("**Role Assignment**")
+        st.markdown("Assign a specific role or persona to the model within the prompt.")
+        echo_directive = st.toggle("**Echo Directive**")
+        st.markdown("Repeat a specific word or phrase multiple times within a prompt.")
     
     with st.expander("**Complex Tasks and Coding Prompts**", expanded=True): 
-        task_decomposition = st.toggle("Task Decomposition")
-        cot_with_fewshot = st.toggle("CoT with Few-Shot")
+        task_decomposition = st.toggle("**Task Decomposition**")
+        st.markdown("Break down complex tasks into a sequence of simpler prompts in an interactive conversation.")
+        cot_with_fewshot = st.toggle("**CoT with Few-Shot**")
+        st.markdown("Combine Chain-of-thought (Cot) with few-shot prompts.")
 
     # skills order need to be optimized 
     skills_to_apply = {
         "no_politeness": no_politeness, 
         "affirmative_sentencing": affirmative_sentencing,  
         "audience_integration": audience_integration,
-        "imperative_task": imperative_task,
+        "role_assignment": role_assignment,
         "penalty_warning": penalty_warning,
+        "imperative_task": imperative_task,
+        "guideline_indicators": guideline_indicators,
         "task_decomposition": task_decomposition,
         "fewshot_prompting": fewshot_prompting,
-        "cot_with_fewshot": cot_with_fewshot,
-        "guideline_indicators": guideline_indicators,
-        "role_assignment": role_assignment,
+        "cot_with_fewshot": cot_with_fewshot,  
         "echo_directive": echo_directive,
         "delimiters": delimiters,
         "formatted_prompt": formatted_prompt,
@@ -67,9 +88,12 @@ with col1:
     }
 
 with col2:
+    st.markdown("""### Enhance your prompt easily!""")
+    st.text("")
     prompt = st.text_area("**Original Prompt**", placeholder="Enter your prompt here to receive an enhanced version.", height=300)
 
     phrases_to_insert = {} 
+    st.text("")
     st.write("**How about including these magical phrases or words in your prompt?**")
     step_by_step = st.checkbox("Take a deep breath and work on this step by step.")
     tipping = st.checkbox("I’m going to tip $200 for a better solution!")
@@ -90,13 +114,17 @@ with col2:
         "unbiased_response": unbiased_response,
     }
 
-
+    st.text("")
     model_name = st.radio("**Select the model**", ('gpt-3.5-turbo-0125', 'gpt-4-0125-preview', 'gpt-4'), horizontal=True)
-    enhance_btn = st.button("**Enhance!**")
+    st.text("")
+    st.text("")
+    enhance_btn = st.button("**:blue[Enhance!]**")
 
     if enhance_btn:
+        if not prompt:
+            st.toast("Please enter your prompt.")
         if not OPENAI_API_KEY:
-            st.toast("Please enter your OpenAI API Key")
+            st.toast("Please enter your OpenAI API Key.")
 
         order_num = 1
         with st.spinner("Processing..."): 
@@ -105,20 +133,20 @@ with col2:
             for skill, toggled in skills_to_apply.items():
                 if toggled:
                     prompt = apply_skill(llm, skill, prompt)
-                    st.markdown(f"{order_num}. Your prompt has been enhanced with **\"{skill}\"**!")
+                    st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{skill}\"**!")
                     container = st.container(border=True)
                     container.markdown(prompt) 
                     order_num+=1
 
             for phrase, checked in phrases_to_insert.items():
                 if checked and phrase in insert_front.keys():
-                    st.markdown(f"{order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
+                    st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
                     prompt = insert_front[phrase] + '<br>' + prompt
                     container = st.container(border=True)
                     container.markdown(prompt, unsafe_allow_html=True) 
                     order_num+=1
                 elif checked and phrase in insert_back.keys():
-                    st.markdown(f"{order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
+                    st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
                     prompt = prompt + '<br>' + insert_back[phrase]
                     container = st.container(border=True)
                     container.markdown(prompt, unsafe_allow_html=True) 
@@ -130,3 +158,7 @@ with col2:
         container = st.container(border=True)
         container.title(":crystal_ball:") 
         container.markdown(prompt, unsafe_allow_html=True) 
+
+
+st.markdown("<p style='text-align: center;'>Email: lim.gadi@gmail.com</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Github: @lim-hyo-jeong</p>", unsafe_allow_html=True)
