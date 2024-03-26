@@ -2,12 +2,18 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
 from langchain_core.prompts import PromptTemplate
 import os 
+import re 
 
 
 def load_model(model_name):
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
     llm = ChatOpenAI(api_key=OPENAI_API_KEY, model_name=model_name)
     return llm 
+
+
+def convert_newlines(prompt):
+    prompt = prompt.replace("\n", "  \n")
+    return prompt
 
 
 def apply_skill(llm, skill, prompt):
@@ -53,4 +59,5 @@ def insert_phrases(llm, phrases_to_insert, prompt):
     response = llm.invoke(messages)
 
     return response.content
+
 

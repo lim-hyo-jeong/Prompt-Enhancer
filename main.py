@@ -1,6 +1,6 @@
 import streamlit as st
 import os 
-from src.utils import load_model, apply_skill
+from src.utils import load_model, apply_skill, convert_newlines
 from src.constants import insert_front, insert_back 
 
 
@@ -33,41 +33,43 @@ with col1:
         st.info("For detailed information on each prompt engineering skill, click [here](https://arxiv.org/pdf/2312.16171.pdf)")
         st.warning("**Warning**: Some prompt engineering skills can conflict with each other and may not be applied effectively.  \ne.g. \"Impertavie Task\" and \"Penalty Warning\"")
     
+    toggle_all = st.toggle("**Select/Unselect all skills**", key="master_toggle")
+    
     with st.expander("**Prompt Structure and Clarity**", expanded=True):
-        audience_integration = st.toggle("**Audience Integration**")
+        audience_integration = st.toggle("**Audience Integration**", value=toggle_all)
         st.markdown("Integrate the intended audience in the prompt.")
-        affirmative_sentencing = st.toggle("**Affirmative Sentencing**")
+        affirmative_sentencing = st.toggle("**Affirmative Sentencing**", value=toggle_all)
         st.markdown("Employ affirmative directives such as 'do,' while steering clear of negative language like 'don’t'.")
-        output_primers = st.toggle("**Output Primers**")
+        output_primers = st.toggle("**Output Primers**", value=toggle_all)
         st.markdown("Use output primers, which involve concluding the prompt with the beginning of the desired output.")
-        delimiters = st.toggle("**Delimiters**") 
+        delimiters = st.toggle("**Delimiters**", value=toggle_all) 
         st.markdown("Use delimiters to distinguish specific segments of text within the prompt.")
-        formatted_prompt = st.toggle("**Formatted Prompt**") 
+        formatted_prompt = st.toggle("**Formatted Prompt**", value=toggle_all) 
         st.markdown("Use Formatted prompt to allow the model to understand the requirements structurally.")
 
     with st.expander("**Specificity and Information**", expanded=True):
-        fewshot_prompting = st.toggle("**Few-Shot Prompting**")
+        fewshot_prompting = st.toggle("**Few-Shot Prompting**", value=toggle_all)
         st.markdown("Implement example-driven prompting.")
-        guideline_indicators = st.toggle("**Guideline Indicators**")
+        guideline_indicators = st.toggle("**Guideline Indicators**", value=toggle_all)
         st.markdown("Clarify the requirements using keywords, regulations, hints, or instructions.")
 
     with st.expander("**Content and Language Style**", expanded=True): 
-        no_politeness = st.toggle("**No Politeness**")
+        no_politeness = st.toggle("**No Politeness**", value=toggle_all)
         st.markdown("If you prefer more concise answers, remove any unnecessary polite or indirect phrases in the prompt.")
-        imperative_task = st.toggle("**Imperative Task**")
+        imperative_task = st.toggle("**Imperative Task**", value=toggle_all)
         st.markdown("Incorporate the following phrases: \"Your task is\" and \"You MUST\".")
-        penalty_warning = st.toggle("**Penalty Warning**") 
+        penalty_warning = st.toggle("**Penalty Warning**", value=toggle_all) 
         st.markdown("Incorporate the following phrases: \"You will be penalized\".")
-        role_assignment = st.toggle("**Role Assignment**")
+        role_assignment = st.toggle("**Role Assignment**", value=toggle_all)
         st.markdown("Assign a specific role or persona to the model within the prompt.")
-        echo_directive = st.toggle("**Echo Directive**")
+        echo_directive = st.toggle("**Echo Directive**", value=toggle_all)
         st.markdown("Repeat a specific word or phrase multiple times within a prompt.")
     
-    with st.expander("**Complex Tasks and Coding Prompts**", expanded=True): 
-        task_decomposition = st.toggle("**Task Decomposition**")
+    with st.expander("**Complex Tasks**", expanded=True): 
+        task_decomposition = st.toggle("**Task Decomposition**", value=toggle_all)
         st.markdown("Break down complex tasks into a sequence of simpler prompts in an interactive conversation.")
-        cot_with_fewshot = st.toggle("**CoT with Few-Shot**")
-        st.markdown("Combine Chain-of-thought (Cot) with few-shot prompts.")
+        # cot_with_fewshot = st.toggle("**CoT with Few-Shot**", value=toggle_all)
+        # st.markdown("Combine Cot with few-shot prompts.")
 
     # skills order need to be optimized 
     skills_to_apply = {
@@ -80,12 +82,13 @@ with col1:
         "guideline_indicators": guideline_indicators,
         "task_decomposition": task_decomposition,
         "fewshot_prompting": fewshot_prompting,
-        "cot_with_fewshot": cot_with_fewshot,  
+        # "cot_with_fewshot": cot_with_fewshot,  
         "echo_directive": echo_directive,
         "delimiters": delimiters,
         "formatted_prompt": formatted_prompt,
         "output_primers": output_primers,
     }
+
 
 with col2:
     st.markdown("""### Enhance your prompt easily!""")
@@ -135,21 +138,21 @@ with col2:
                     prompt = apply_skill(llm, skill, prompt)
                     st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{skill}\"**!")
                     container = st.container(border=True)
-                    container.markdown(prompt) 
+                    container.markdown(convert_newlines(prompt))
                     order_num+=1
 
             for phrase, checked in phrases_to_insert.items():
                 if checked and phrase in insert_front.keys():
                     st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
-                    prompt = insert_front[phrase] + '<br>' + prompt
+                    prompt = insert_front[phrase] + '\n' + prompt
                     container = st.container(border=True)
-                    container.markdown(prompt, unsafe_allow_html=True) 
+                    container.markdown(convert_newlines(prompt)) 
                     order_num+=1
                 elif checked and phrase in insert_back.keys():
                     st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
-                    prompt = prompt + '<br>' + insert_back[phrase]
+                    prompt = prompt + '\n' + insert_back[phrase]
                     container = st.container(border=True)
-                    container.markdown(prompt, unsafe_allow_html=True) 
+                    container.markdown(convert_newlines(prompt)) 
                     order_num+=1
                 
 
@@ -157,8 +160,9 @@ with col2:
         st.markdown("### Enhanced Prompt")
         container = st.container(border=True)
         container.title(":crystal_ball:") 
-        container.markdown(prompt, unsafe_allow_html=True) 
+        container.markdown(convert_newlines(prompt)) 
 
-
+st.text("")
+st.text("")
 st.markdown("<p style='text-align: center;'>Email: lim.gadi@gmail.com</p>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Github: @lim-hyo-jeong</p>", unsafe_allow_html=True)
