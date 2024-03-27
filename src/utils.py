@@ -2,7 +2,6 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
 from langchain_core.prompts import PromptTemplate
 import os 
-import re 
 
 
 def load_model(model_name):

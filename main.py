@@ -165,4 +165,4 @@ with col2:
 st.text("")
 st.text("")
 st.markdown("<p style='text-align: center;'>Email: lim.gadi@gmail.com</p>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Github: @lim-hyo-jeong</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Github: [@lim-hyo-jeong](https://github.com/lim-hyo-jeong)</p>", unsafe_allow_html=True)
