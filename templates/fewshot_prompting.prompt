@@ -4,13 +4,13 @@ Here are examples demonstrating how to apply this principle:
 
 [original]
 Classify the emotion of the following text as positive, negative, or neutral. 
-"You look really cool in glasses." 
+"It's a good day to try something fun." 
 [improved]
 Classify the emotion of the following text as positive, negative, or neutral. 
-Example1: "The concert was fun." (Positive) 
-Example2: "I hate the cold." (Negative)
-Example3: "Spring is coming." (Neutral)
-Question: "You look really cool in glasses." 
+Example1: "This music is awesome." (Positive) 
+Example2: "I don't like spicy flavors." (Negative)
+Example3: "Every flower blooms at a different pace." (Neutral)
+Question: "It's a good day to try something fun." 
 
 ========
 Based on this approach, refine the following prompt.
