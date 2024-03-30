@@ -7,7 +7,7 @@ from src.constants import insert_front, insert_back
 st.set_page_config(page_title="Prompt Enhancer", page_icon=":rocket:", initial_sidebar_state="collapsed", layout="wide")
 st.title(":rocket: Prompt Enhancer")
 st.markdown("""
-##### Enhance your prompts in just a few clicks with intuitive interface.
+##### Prompt Engineering at Your Fingertips!
 """)
 st.text("")
 st.text("")
@@ -97,7 +97,7 @@ with col2:
 
     phrases_to_insert = {} 
     st.text("")
-    st.write("**How about including these magical phrases or words in your prompt?**")
+    st.markdown("**How about including these magical phrases or words in your prompt?**")
     step_by_step = st.checkbox("Take a deep breath and work on this step by step.")
     tipping = st.checkbox("I’m going to tip $200 for a better solution!")
     important_to_career = st.checkbox("This is very important to my career.")
@@ -106,7 +106,6 @@ with col2:
     human_like_response = st.checkbox("Answer in a natural, human-like manner.")
     unbiased_response = st.checkbox("Ensure that your answer is unbiased and avoids relying on stereotypes.")
     
-    # phrases order need to be optimized 
     phrases_to_insert = {
         "step_by_step": step_by_step,
         "tipping": tipping,
