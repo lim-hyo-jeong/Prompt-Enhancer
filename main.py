@@ -12,6 +12,7 @@ st.markdown("""
 st.text("")
 st.text("")
 
+
 with st.popover("**:blue[Enter your OpenAI API key]**"):
     OPENAI_API_KEY = st.text_input("OpenAI API key", type="password")
     os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY 
@@ -24,6 +25,7 @@ if not OPENAI_API_KEY:
     temp.error("**Please enter your OpenAI API key**") 
 st.text("")
 st.text("")
+
 
 col1, buff, col2 = st.columns([0.3, 0.05, 0.65])
 
@@ -117,7 +119,16 @@ with col2:
     }
 
     st.text("")
-    model_name = st.radio("**Select the model**", ('gpt-3.5-turbo-0125', 'gpt-4-0125-preview', 'gpt-4'), horizontal=True)
+
+    model_name = st.selectbox("**Select the model**", 
+                              ("gpt-3.5-turbo", "gpt-3.5-turbo-1106", "gpt-4-turbo-preview", "gpt-4-turbo", "gpt-4-1106-preview", "gpt-4", "gpt-4-32k"), 
+                              index=0, 
+                              placeholder="Select contact method...")
+
+    st.text("") 
+
+    lang_eng = st.checkbox("Provide the enhanced prompt in English (if the original input is in another language)")
+
     st.text("")
     st.text("")
     enhance_btn = st.button("**:blue[Enhance!]**")
@@ -134,7 +145,7 @@ with col2:
 
             for skill, toggled in skills_to_apply.items():
                 if toggled:
-                    prompt = apply_skill(llm, skill, prompt)
+                    prompt = apply_skill(llm, skill, prompt, lang_eng)
                     st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{skill}\"**!")
                     container = st.container(border=True)
                     container.markdown(convert_newlines(prompt))

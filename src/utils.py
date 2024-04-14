@@ -15,12 +15,22 @@ def convert_newlines(prompt):
     return prompt
 
 
-def apply_skill(llm, skill, prompt):
+def apply_skill(llm, skill, prompt, lang_eng=False):
     with open(f"templates/system.prompt", "r") as f:
-        system_message = f.read() 
+        system_message = f.read()
+
+    if lang_eng:
+        with open(f"templates/lang_eng.prompt", "r") as f:
+            lang_message = f.read()
+    else:
+        with open(f"templates/lang_default.prompt", "r") as f:
+            lang_message = f.read()
+
+    system_message = system_message + '\n' + lang_message
+    print(system_message)
 
     with open(f"templates/{skill}.prompt", "r") as f:
-        template = f.read() 
+        template = f.read()
 
     prompt_template = PromptTemplate.from_template(template)
     formatted_input = prompt_template.format(prompt=prompt)
