@@ -3,9 +3,9 @@ Incorporate delimiters such as <>, <tag></tag>, or '' in the original prompt to 
 Here are examples demonstrating how to apply this principle:
 
 [original]
-Create a step-by-step guide on how to meditate for beginners, highlighting its benefits for mental well-being.
+Create a step-by-step guide on how to meditate for beginners, highlighting its benefits for mental well-being.
 [improved]
-Create a step-by-step guide on how to <meditate> for beginners, highlighting its benefits for mental well-being.
+Create a step-by-step guide on how to <meditate> for beginners, highlighting its benefits for mental well-being.
 
 ========
 Based on this approach, refine the following prompt.

@@ -2,6 +2,7 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
 from langchain_core.prompts import PromptTemplate
 import os 
+from src.prompts import templates
 
 
 def load_model(model_name):
@@ -15,24 +16,43 @@ def convert_newlines(prompt):
     return prompt
 
 
-def apply_skill(llm, skill, prompt, lang_eng=False):
-    with open(f"templates/system.prompt", "r") as f:
-        system_message = f.read()
+def apply_skill(llm, skill, prompt, order_num, lang_eng=False):
+    system_message = templates["system"]
+    if lang_eng and order_num == 1:
+        system_message += '\n' + templates["lang_eng"]
+    elif not lang_eng:
+        system_message += '\n' + templates["lang_default"]
 
-    if lang_eng:
-        with open(f"templates/lang_eng.prompt", "r") as f:
-            lang_message = f.read()
-    else:
-        with open(f"templates/lang_default.prompt", "r") as f:
-            lang_message = f.read()
-
-    system_message = system_message + '\n' + lang_message
-    print(system_message)
-
-    with open(f"templates/{skill}.prompt", "r") as f:
-        template = f.read()
-
+    template = templates[skill]
     prompt_template = PromptTemplate.from_template(template)
+    formatted_input = prompt_template.format(prompt=prompt)
+    
+    messages = [
+        SystemMessage(content=system_message),
+        HumanMessage(content=formatted_input),
+    ]
+
+    response = llm.invoke(messages)
+
+    return response.content
+
+
+def apply_skills(llm, skills_to_apply, prompt, lang_eng=False):
+    system_message = templates["system_multiple"]
+    if lang_eng:
+        system_message += '\n' + templates["lang_eng"]
+    else:
+        system_message += '\n' + templates["lang_default"]
+
+    skills = [skill for skill, toggled in skills_to_apply.items() if toggled]
+    integrated_templates = "[Prompt Engineering Techniques to Apply]\n"
+
+    for idx, skill in enumerate(skills):
+        template = templates[f"{skill}_simpler"]
+        integrated_templates += f"{idx+1}. {skill}: {template}\n"
+    integrated_templates += "Based on [Prompt engineering techniques to apply], refine the prompt provided below. Ensure that each technique is fully incorporated to achieve a clear and effective improvement:\n\n[original]\n{prompt}\n[improved]\n"
+
+    prompt_template = PromptTemplate.from_template(integrated_templates)
     formatted_input = prompt_template.format(prompt=prompt)
 
     messages = [
@@ -43,30 +63,4 @@ def apply_skill(llm, skill, prompt, lang_eng=False):
     response = llm.invoke(messages)
 
     return response.content
-
-
-def insert_phrases(llm, phrases_to_insert, prompt):
-    with open(f"templates/system.prompt", "r") as f:
-        system_message = f.read() 
-    
-    with open(f"templates/insert_phrases.prompt", "r") as f:
-        template = f.read()
-
-    phrases_collection = ""
-    for i, phrase in enumerate(phrases_to_insert):
-        phrases_collection += f"{i+1}. {phrase}\n"
-    
-    prompt_template = PromptTemplate.from_template(template)
-    formatted_input = prompt_template.format(phrases_collection=phrases_collection,
-                                             prompt=prompt)
-    
-    messages = [
-        SystemMessage(content=system_message),
-        HumanMessage(content=formatted_input),
-    ]
-
-    response = llm.invoke(messages)
-
-    return response.content
-
 

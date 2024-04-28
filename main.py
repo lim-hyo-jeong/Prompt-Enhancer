@@ -1,7 +1,7 @@
 import streamlit as st
 import os 
-from src.utils import load_model, apply_skill, convert_newlines
-from src.constants import insert_front, insert_back 
+from src.utils import load_model, apply_skill, apply_skills, convert_newlines
+from src.prompts import insert
 
 
 st.set_page_config(page_title="Prompt Enhancer", page_icon=":rocket:", initial_sidebar_state="collapsed", layout="wide")
@@ -112,7 +112,7 @@ with col2:
         "step_by_step": step_by_step,
         "tipping": tipping,
         "important_to_career": important_to_career,
-        "expain_beginner": explain_beginner,
+        "explain_beginner": explain_beginner,
         "detailed_writing": detailed_writing,
         "human_like_response": human_like_response,
         "unbiased_response": unbiased_response,
@@ -123,12 +123,12 @@ with col2:
     model_name = st.selectbox("**Select the model**", 
                               ("gpt-3.5-turbo", "gpt-3.5-turbo-1106", "gpt-4-turbo-preview", "gpt-4-turbo", "gpt-4-1106-preview", "gpt-4", "gpt-4-32k"), 
                               index=0, 
-                              placeholder="Select contact method...")
+                              placeholder="Select the model...")
 
     st.text("") 
 
-    lang_eng = st.checkbox("Provide the enhanced prompt in English (if the original input is in another language)")
-
+    lang_eng = st.checkbox("**Provide the enhanced prompt in English.** (If the original input is in another language but you need the prompt in English.)")
+    simplified = st.checkbox("**Enhance the prompt with simplified instructions that save processing time and tokens.** (Best results with GPT-4 models)")
     st.text("")
     st.text("")
     enhance_btn = st.button("**:blue[Enhance!]**")
@@ -143,33 +143,34 @@ with col2:
         with st.spinner("Processing..."): 
             llm = load_model(model_name)
 
-            for skill, toggled in skills_to_apply.items():
-                if toggled:
-                    prompt = apply_skill(llm, skill, prompt, lang_eng)
-                    st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{skill}\"**!")
-                    container = st.container(border=True)
-                    container.markdown(convert_newlines(prompt))
-                    order_num+=1
-
-            for phrase, checked in phrases_to_insert.items():
-                if checked and phrase in insert_front.keys():
-                    st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
-                    prompt = insert_front[phrase] + '\n' + prompt
-                    container = st.container(border=True)
-                    container.markdown(convert_newlines(prompt)) 
-                    order_num+=1
-                elif checked and phrase in insert_back.keys():
-                    st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
-                    prompt = prompt + '\n' + insert_back[phrase]
-                    container = st.container(border=True)
-                    container.markdown(convert_newlines(prompt)) 
-                    order_num+=1
+            if simplified:
+                prompt = apply_skills(llm, skills_to_apply, prompt, lang_eng) 
                 
+                for phrase, checked in phrases_to_insert.items():
+                    if checked:
+                        prompt = insert[phrase] + '\n' + prompt
+    
+            else:
+                for skill, toggled in skills_to_apply.items():
+                    if toggled:
+                        prompt = apply_skill(llm, skill, prompt, order_num, lang_eng)
+                        st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{skill}\"**!")
+                        container = st.container(border=True)
+                        container.markdown(convert_newlines(prompt))
+                        order_num+=1
 
+                for phrase, checked in phrases_to_insert.items():
+                    if checked:
+                        st.markdown(f":zap: {order_num}. Your prompt has been enhanced with **\"{phrase}\"**!")
+                        prompt = insert[phrase] + '\n' + prompt
+                        container = st.container(border=True)
+                        container.markdown(convert_newlines(prompt)) 
+                        order_num+=1
+                
         st.toast("Prompt Enhancement Success!")     
         st.markdown("### Enhanced Prompt")
         container = st.container(border=True)
-        container.title(":crystal_ball:") 
+        container.title(":crystal_ball:")
         container.markdown(convert_newlines(prompt)) 
 
 st.text("")

@@ -3,13 +3,12 @@ For complex or multi-step tasks, divide the original prompt into a series of sim
 Here are examples demonstrating how to apply this principle:
 
 [original]
-Create a short story about a character who discovers an old, mysterious book that grants them extraordinary powers.
+Create a short story about a character who discovers an old, mysterious book that grants them extraordinary powers.
 [improved]
 1. Create a short story about a character who discovers an old, mysterious book that grants them extraordinary powers. first: Introduce the protagonist, ordinary life, and setting.
 2. Describe discovering the book and the character's growing powers.
 3. present challenges from powers and character's growth.Resolve conflicts, and show the character's reflection on the journey.
 4. write the short story.
-
 
 ========
 Based on this approach, refine the following prompt to enable its breakdown into a series of simpler, step-by-step tasks:

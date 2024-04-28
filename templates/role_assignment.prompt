@@ -3,9 +3,9 @@ To better guide the model's response, assign a specific role or persona to the m
 Here are examples demonstrating how to apply this principle:
 
 [original]
-Can you discuss the effects of deforestation on biodiversity?
+Can you discuss the effects of deforestation on biodiversity?
 [improved]
-Act as an environmental scientist. Discuss the effects of deforestation on biodiversity.
+Act as an environmental scientist. Discuss the effects of deforestation on biodiversity.
 
 ========
 Based on this approach, refine the following prompt:

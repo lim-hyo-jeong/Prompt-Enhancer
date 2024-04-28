@@ -3,16 +3,16 @@ Structure the original prompt by beginning with the '###Instruction###' tag, fol
 Here are examples demonstrating how to apply this principle:
 
 [original]
-Provide a synonym for a given adjective. What’s another word for "happy"?
+Provide a synonym for a given adjective. What’s another word for "happy"?
 [improved]
 ###Instruction###
-Provide a synonym for a given adjective.
-### Question ###
-What's another word for "happy"?
+Provide a synonym for a given adjective.
+### Question ###
+What's another word for "happy"?
 
 ========
 Based on this approach, refine the following prompt.
 
 [original]
 {prompt}
-[improved] 
+[improved]
